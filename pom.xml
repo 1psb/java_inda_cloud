@@ -29,6 +29,7 @@
         <module>pc</module>
         <module>po</module>
         <module>config</module>
+        <module>sd</module>
     </modules>
 
     <dependencyManagement>

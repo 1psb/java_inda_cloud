@@ -2,7 +2,9 @@ version: '2'
 
 services:
   eureka:
-    image: springcloud/eureka
+    container_name: eureka
+    build: ./sd
+    hostname: eureka
     ports:
       - "8761:8761"
   mongo:
