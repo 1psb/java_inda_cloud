@@ -1,0 +1,3 @@
+[submodule "config-storage"]
+	path = config-storage
+	url = ./config-storage/.git
