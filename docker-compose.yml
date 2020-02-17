@@ -10,33 +10,32 @@ services:
     ports:
       - "27017:27017"
   pc:
-    image: humb1t/pc
+    build: ./pc
     ports:
-      - '8081:8080'
-      - '5010:5005'
+      - '8081:8081'
+      - '5081:5081'
     depends_on:
       - eureka
       - mongo
+      - config
     environment:
-      SPRING_DATA_MONGODB_HOST: mongo
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: 'http://eureka:8761/eureka/'
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: 'http://eureka:8761/eureka'
   po:
-    image: humb1t/po
+    build: ./po
     ports:
-      - '8082:8080'
-      - '5020:5005'
+      - '8082:8082'
+      - '5082:5082'
     links:
       - pc
     depends_on:
       - eureka
       - mongo
       - pc
+      - config
     environment:
-      SPRING_DATA_MONGODB_HOST: mongo
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
-      pcurl: 'pc:8080'
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: 'http://eureka:8761/eureka/'
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: 'http://eureka:8761/eureka'
   config:
     build:
       context: .
